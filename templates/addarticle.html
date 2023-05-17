@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="row">
+    <div style="margin-top:200;" class=".col-auto .mr-auto">
+        <br>
+        <h3>Makale Ekle</h3>
+        <hr>    
+        <form  method="post">
+            {% csrf_token %}
+            {{form.media}}<!--ckeditor için-->
+            {{ form.as_p }}
+            <br>
+            <button type="submit" class="btn btn-success">Makale Ekle</button>
+        </form> 
+    </div>
+</div>
+{% endblock body %}

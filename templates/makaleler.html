@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block body %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet" />
+{% if articles %}
+<h1>Makaleler</h1>
+<hr>
+<div class="container mt-5">
+    
+    <div class="row">
+        
+        <div class=".col-auto .mr-auto">
+            {% if articles %}
+            {% csrf_token %}
+            <form>
+            <input class=".col-auto .mr-auto" name ="keyword" id="search-focus" type="search" placeholder="Ara..." id="form1"/><!--isim vermeyi unutma name**-->
+            <button type="submit" class="btn btn-success">Ara</button>
+            </form>
+            {% else %}
+            <div class="alert alert-danger">Makaleniz Bulunmuyor !</div>
+            {% endif %}
+
+            <!-- Post content-->
+
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    {% for article in articles %}
+                    
+                    
+                    <h3 class="fw-bolder mb-1">
+                        
+                        {{article.title}}
+                        <br>*Başlıklı Makalenin Konusu
+                    </h3>
+                    
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">{{article.datetime}}</div>
+                    <!-- Post categories-->
+                    
+                </header>
+                <hr>
+                <!-- Preview image figure-->
+                
+                <!-- Post content-->
+                <section class="mb-5">
+                    <h3>{{article.content|truncatewords:25}}</h3>
+                    <hr>
+                    <a style="float : right" href="/makaleler/detay/{{article.id}}" class ="btn btn-success">Devamını Oku</a>
+                    </section>
+                    <hr>
+                    {% endfor %}
+<hr><hr>                  
+{% block body1 %}
+
+
+
+
+
+
+
+
+{% endblock body1 %} 
+           
+                
+        
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+
+{% else %}
+<div class="alert alert-danger">Makaleniz Bulunmuyor !</div>
+{% endif %}
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+          <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+          <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+{% endblock body %}
